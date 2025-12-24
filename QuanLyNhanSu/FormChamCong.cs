@@ -9,7 +9,6 @@ namespace QuanLyNhanSu
 {
 	public partial class FormChamCong : System.Windows.Forms.Form
 	{
-		// Khai báo Context
 		QuanLyNhanSuContext db = new QuanLyNhanSuContext();
 
 		public FormChamCong()
@@ -19,35 +18,15 @@ namespace QuanLyNhanSu
 
 		private void FormChamCong_Load(object sender, EventArgs e)
 		{
-			try
-			{
-				if (db.Database.GetDbConnection().State != ConnectionState.Open)
-					db.Database.OpenConnection();
-
-				string sqlFix = @"
-                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[ChamCong]') AND name = 'trangThai')
-                        ALTER TABLE ChamCong ADD trangThai NVARCHAR(50);
-                    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[ChamCong]') AND name = 'Ngay')
-                        ALTER TABLE ChamCong ADD Ngay INT;
-                    
-                    -- Cập nhật các ô NULL thành giá trị mặc định để tránh lỗi
-                    UPDATE ChamCong SET checkin = '' WHERE checkin IS NULL;
-                    UPDATE ChamCong SET checkout = '' WHERE checkout IS NULL;
-                    UPDATE ChamCong SET trangThai = N'Đang làm việc' WHERE trangThai IS NULL;
-                    UPDATE ChamCong SET SoNgayCong = 0 WHERE SoNgayCong IS NULL;
-                    UPDATE ChamCong SET GhiChu = '' WHERE GhiChu IS NULL;
-                    UPDATE ChamCong SET Ngay = DAY(GETDATE()) WHERE Ngay IS NULL; 
-                ";
-				db.Database.ExecuteSqlRaw(sqlFix);
-			}
-			catch { }
 			dtpThangNam.Format = DateTimePickerFormat.Custom;
 			dtpThangNam.CustomFormat = "MM/yyyy";
 			dtpThangNam.ShowUpDown = true;
+
 			LoadCboNhanVien();
 			LoadDataChamCong();
 			PhanQuyenGiaoDien();
 		}
+
 		void LoadCboNhanVien()
 		{
 			try
@@ -57,7 +36,7 @@ namespace QuanLyNhanSu
 					var listNV = context.Nvs.Select(x => new
 					{
 						x.IdNv,
-						HoTenHienThi = "[" + x.IdNv + "] - " + x.NvTen 
+						HoTenHienThi = "[" + x.IdNv + "] - " + x.NvTen
 					}).ToList();
 
 					cboNhanVien.DataSource = listNV;
@@ -68,41 +47,43 @@ namespace QuanLyNhanSu
 			}
 			catch { }
 		}
+
 		void PhanQuyenGiaoDien()
 		{
 			string quyen = LuuTru.Quyen != null ? LuuTru.Quyen.ToLower().Trim() : "";
 
-			if (quyen == "user" || quyen == "nhanvien" || quyen == "nhân viên")
+			if (Controls.ContainsKey("btnDiemDanh"))
+				Controls["btnDiemDanh"].Visible = true;
+
+			if (quyen == "hr" || quyen == "admin" || quyen == "quanly")
 			{
-				if (Controls.ContainsKey("btnDiemDanh")) Controls["btnDiemDanh"].Visible = true;
-
-				btnLuu.Visible = false;
-				btnXoa.Visible = false;
-				if (Controls.ContainsKey("btnSua")) Controls["btnSua"].Visible = false;
-
-				cboNhanVien.Enabled = false; 
-				txtSoNgayCong.ReadOnly = true;
-				txtGhiChu.ReadOnly = true;
-
-				// Tự động chọn tên mình trong ComboBox nếu có ID
-				if (LuuTru.IdNhanVien != null)
-				{
-					cboNhanVien.SelectedValue = LuuTru.IdNhanVien;
-				}
-			}
-			else
-			{
-				if (Controls.ContainsKey("btnDiemDanh")) Controls["btnDiemDanh"].Visible = false;
-
 				btnLuu.Visible = true;
 				btnXoa.Visible = true;
 				if (Controls.ContainsKey("btnSua")) Controls["btnSua"].Visible = true;
 
 				cboNhanVien.Enabled = true;
+
 				txtSoNgayCong.ReadOnly = false;
 				txtGhiChu.ReadOnly = false;
 			}
+			else
+			{
+				btnLuu.Visible = false;
+				btnXoa.Visible = false;
+				if (Controls.ContainsKey("btnSua")) Controls["btnSua"].Visible = false;
+
+				cboNhanVien.Enabled = false;
+
+				txtSoNgayCong.ReadOnly = true;
+				txtGhiChu.ReadOnly = true;
+
+				if (LuuTru.IdNhanVien != null)
+				{
+					cboNhanVien.SelectedValue = LuuTru.IdNhanVien;
+				}
+			}
 		}
+
 		void LoadDataChamCong()
 		{
 			int thang = dtpThangNam.Value.Month;
@@ -110,7 +91,6 @@ namespace QuanLyNhanSu
 
 			try
 			{
-				// using để reset kết nối
 				using (var context = new QuanLyNhanSuContext())
 				{
 					dgvChamCong.AutoGenerateColumns = true;
@@ -118,12 +98,10 @@ namespace QuanLyNhanSu
 
 					var query = context.ChamCongs.AsQueryable();
 
-					//Lọc theo tháng năm
 					query = query.Where(cc => cc.Thang == thang && cc.Nam == nam);
 
-					//Lọc theo quyền Nhân viên chỉ xem của mình
 					string quyen = LuuTru.Quyen != null ? LuuTru.Quyen.ToLower().Trim() : "";
-					if (quyen == "user" || quyen == "nhanvien" || quyen == "nhân viên")
+					if (quyen != "hr" && quyen != "admin" && quyen != "quanly")
 					{
 						if (LuuTru.IdNhanVien != null)
 						{
@@ -131,11 +109,12 @@ namespace QuanLyNhanSu
 							query = query.Where(cc => cc.IdNv == myID);
 						}
 					}
+
 					var rawData = query.Select(cc => new
 					{
 						ID = cc.IdChamCong,
 						MaNV = cc.IdNv,
-						TenNV = cc.NhanVien.NvTen, 
+						TenNV = cc.NhanVien.NvTen,
 						Ngay = (int?)cc.Ngay,
 						Thang = (int?)cc.Thang,
 						Nam = (int?)cc.Nam,
@@ -145,19 +124,18 @@ namespace QuanLyNhanSu
 						SoNgayCong = (double?)cc.SoNgayCong,
 						GhiChu = cc.GhiChu
 					}).ToList();
+
 					var listHienThi = rawData.Select(cc => new
 					{
 						ID = cc.ID,
 						MaNV = cc.MaNV,
 						TenNV = cc.TenNV ?? "NV (" + cc.MaNV + ")",
 						Ngay = (cc.Ngay.HasValue) ? (cc.Ngay + "/" + thang + "/" + nam) : ("?/" + thang + "/" + nam),
-
 						GioVao = cc.Checkin ?? "",
 						GioRa = cc.Checkout ?? "",
 						TrangThai = cc.TrangThai ?? "Chưa rõ",
 						NgayCong = cc.SoNgayCong ?? 0,
 						GhiChu = cc.GhiChu ?? "",
-
 						SortDay = cc.Ngay ?? 0
 					})
 					.OrderByDescending(x => x.SortDay)
@@ -177,7 +155,6 @@ namespace QuanLyNhanSu
 		{
 			if (dgvChamCong.Columns.Count == 0) return;
 
-			// Ẩn cột ID và cột Sắp xếp
 			if (dgvChamCong.Columns["ID"] != null) dgvChamCong.Columns["ID"].Visible = false;
 			if (dgvChamCong.Columns["SortDay"] != null) dgvChamCong.Columns["SortDay"].Visible = false;
 
@@ -195,26 +172,25 @@ namespace QuanLyNhanSu
 
 		private void dgvChamCong_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			string quyen = LuuTru.Quyen != null ? LuuTru.Quyen.ToLower() : "";
-			if (quyen.Contains("nhanvien") || quyen.Contains("user")) return;
+			if (e.RowIndex < 0) return;
 
-			if (e.RowIndex >= 0)
+			try
 			{
-				try
-				{
-					var row = dgvChamCong.Rows[e.RowIndex];
+				var row = dgvChamCong.Rows[e.RowIndex];
 
-					if (row.Cells["MaNV"].Value != null)
+				if (row.Cells["MaNV"].Value != null)
+				{
+					int maNV = Convert.ToInt32(row.Cells["MaNV"].Value);
+					if (cboNhanVien.Enabled)
 					{
-						int maNV = Convert.ToInt32(row.Cells["MaNV"].Value);
 						cboNhanVien.SelectedValue = maNV;
 					}
-
-					txtSoNgayCong.Text = row.Cells["NgayCong"].Value?.ToString() ?? "0";
-					txtGhiChu.Text = row.Cells["GhiChu"].Value?.ToString() ?? "";
 				}
-				catch { }
+
+				txtSoNgayCong.Text = row.Cells["NgayCong"].Value?.ToString() ?? "0";
+				txtGhiChu.Text = row.Cells["GhiChu"].Value?.ToString() ?? "";
 			}
+			catch { }
 		}
 
 		private void btnDiemDanh_Click(object sender, EventArgs e)
@@ -232,7 +208,6 @@ namespace QuanLyNhanSu
 			{
 				using (var context = new QuanLyNhanSuContext())
 				{
-					// Tìm xem hôm nay đã check-in chưa
 					var congHomNay = context.ChamCongs.FirstOrDefault(cc =>
 						cc.IdNv == idNv &&
 						cc.Ngay == now.Day &&
@@ -247,7 +222,7 @@ namespace QuanLyNhanSu
 						moi.Thang = now.Month;
 						moi.Nam = now.Year;
 						moi.Checkin = now.ToString("HH:mm");
-						moi.Checkout = ""; 
+						moi.Checkout = "";
 						moi.TrangThai = "Đang làm việc";
 						moi.SoNgayCong = 0.5;
 						moi.GhiChu = "";
@@ -262,7 +237,7 @@ namespace QuanLyNhanSu
 						{
 							congHomNay.Checkout = now.ToString("HH:mm");
 							congHomNay.TrangThai = "Hoàn thành";
-							congHomNay.SoNgayCong = 1.0; 
+							congHomNay.SoNgayCong = 1.0;
 							context.SaveChanges();
 							MessageBox.Show($"Check-out thành công: {congHomNay.Checkout}");
 						}
@@ -294,7 +269,7 @@ namespace QuanLyNhanSu
 
 						item.GhiChu = txtGhiChu.Text;
 
-						if (cboNhanVien.SelectedValue != null)
+						if (cboNhanVien.Enabled && cboNhanVien.SelectedValue != null)
 							item.IdNv = (int)cboNhanVien.SelectedValue;
 
 						context.SaveChanges();
