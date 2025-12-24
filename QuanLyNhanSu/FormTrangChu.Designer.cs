@@ -1,24 +1,24 @@
 ﻿namespace QuanLyNhanSu
 {
-	partial class FormTrangChu
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    partial class FormTrangChu
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
 		#region Windows Form Designer generated code
 
@@ -28,105 +28,153 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTrangChu));
 			label1 = new Label();
+			btnNhanVien = new Button();
+			btnChamCong = new Button();
+			btnLuong = new Button();
+			btnDangXuat = new Button();
+			btnThoat = new Button();
+			btnNghiPhep = new Button();
+			btnTaiKhoan = new Button();
+			btnXemLuongCaNhan = new Button();
+			btnDoiMatKhau = new Button();
 			label2 = new Label();
-			label3 = new Label();
-			checkBox1 = new CheckBox();
-			button1 = new Button();
-			textBox1 = new TextBox();
-			textBox2 = new TextBox();
-			linkLabel1 = new LinkLabel();
 			SuspendLayout();
 			// 
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Font = new Font("Segoe UI", 18F);
-			label1.Location = new Point(326, 45);
+			label1.ForeColor = Color.Black;
+			label1.Location = new Point(386, 25);
 			label1.Name = "label1";
-			label1.Size = new Size(92, 41);
+			label1.Size = new Size(217, 20);
 			label1.TabIndex = 0;
-			label1.Text = "Login";
-			label1.Click += label1_Click;
+			label1.Text = "HỆ THỐNG QUẢN LÝ NHÂN SỰ";
+			// 
+			// btnNhanVien
+			// 
+			btnNhanVien.ForeColor = Color.Black;
+			btnNhanVien.Location = new Point(105, 121);
+			btnNhanVien.Name = "btnNhanVien";
+			btnNhanVien.Size = new Size(152, 55);
+			btnNhanVien.TabIndex = 1;
+			btnNhanVien.Text = "Quản lý nhân viên";
+			btnNhanVien.UseVisualStyleBackColor = true;
+			btnNhanVien.Click += btnNhanVien_Click;
+			// 
+			// btnChamCong
+			// 
+			btnChamCong.Location = new Point(12, 197);
+			btnChamCong.Name = "btnChamCong";
+			btnChamCong.Size = new Size(152, 55);
+			btnChamCong.TabIndex = 2;
+			btnChamCong.Text = "Quản Lý Chấm Công";
+			btnChamCong.UseVisualStyleBackColor = true;
+			btnChamCong.Click += btnChamCong_Click;
+			// 
+			// btnLuong
+			// 
+			btnLuong.Location = new Point(12, 275);
+			btnLuong.Name = "btnLuong";
+			btnLuong.Size = new Size(152, 55);
+			btnLuong.TabIndex = 3;
+			btnLuong.Text = "Quản Lý Tính Lương";
+			btnLuong.UseVisualStyleBackColor = true;
+			btnLuong.Click += btnLuong_Click;
+			// 
+			// btnDangXuat
+			// 
+			btnDangXuat.Location = new Point(202, 430);
+			btnDangXuat.Name = "btnDangXuat";
+			btnDangXuat.Size = new Size(152, 55);
+			btnDangXuat.TabIndex = 4;
+			btnDangXuat.Text = "Đăng Xuất";
+			btnDangXuat.UseVisualStyleBackColor = true;
+			btnDangXuat.Click += btnDangXuat_Click;
+			// 
+			// btnThoat
+			// 
+			btnThoat.Location = new Point(202, 350);
+			btnThoat.Name = "btnThoat";
+			btnThoat.Size = new Size(152, 55);
+			btnThoat.TabIndex = 5;
+			btnThoat.Text = "Thoát Chương Trình";
+			btnThoat.UseVisualStyleBackColor = true;
+			btnThoat.Click += btnThoat_Click;
+			// 
+			// btnNghiPhep
+			// 
+			btnNghiPhep.Location = new Point(12, 350);
+			btnNghiPhep.Name = "btnNghiPhep";
+			btnNghiPhep.Size = new Size(152, 55);
+			btnNghiPhep.TabIndex = 6;
+			btnNghiPhep.Text = "Quản Lý Nghỉ phép";
+			btnNghiPhep.UseVisualStyleBackColor = true;
+			btnNghiPhep.Click += btnNghiPhep_Click;
+			// 
+			// btnTaiKhoan
+			// 
+			btnTaiKhoan.Location = new Point(12, 430);
+			btnTaiKhoan.Name = "btnTaiKhoan";
+			btnTaiKhoan.Size = new Size(152, 55);
+			btnTaiKhoan.TabIndex = 7;
+			btnTaiKhoan.Text = "Quản Lý Tài khoản";
+			btnTaiKhoan.UseVisualStyleBackColor = true;
+			btnTaiKhoan.Click += btnTaiKhoan_Click;
+			// 
+			// btnXemLuongCaNhan
+			// 
+			btnXemLuongCaNhan.Location = new Point(202, 275);
+			btnXemLuongCaNhan.Name = "btnXemLuongCaNhan";
+			btnXemLuongCaNhan.Size = new Size(152, 55);
+			btnXemLuongCaNhan.TabIndex = 9;
+			btnXemLuongCaNhan.Text = "Quản Lý Lương Cá Nhân\r\n\r\n";
+			btnXemLuongCaNhan.UseVisualStyleBackColor = true;
+			btnXemLuongCaNhan.Click += btnXemLuongCaNhan_Click;
+			// 
+			// btnDoiMatKhau
+			// 
+			btnDoiMatKhau.Location = new Point(202, 197);
+			btnDoiMatKhau.Name = "btnDoiMatKhau";
+			btnDoiMatKhau.Size = new Size(152, 55);
+			btnDoiMatKhau.TabIndex = 15;
+			btnDoiMatKhau.Text = " Quản Lý Đổi Mật Khẩu";
+			btnDoiMatKhau.UseVisualStyleBackColor = true;
+			btnDoiMatKhau.Click += btnDoiMatKhau_Click;
 			// 
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Location = new Point(213, 143);
+			label2.ForeColor = Color.Black;
+			label2.Location = new Point(116, 75);
 			label2.Name = "label2";
-			label2.Size = new Size(107, 20);
-			label2.TabIndex = 1;
-			label2.Text = "Tên đăng nhập";
-			// 
-			// label3
-			// 
-			label3.AutoSize = true;
-			label3.Location = new Point(213, 205);
-			label3.Name = "label3";
-			label3.Size = new Size(70, 20);
-			label3.TabIndex = 2;
-			label3.Text = "Mật khẩu";
-			label3.Click += label3_Click;
-			// 
-			// checkBox1
-			// 
-			checkBox1.AutoSize = true;
-			checkBox1.Location = new Point(213, 245);
-			checkBox1.Name = "checkBox1";
-			checkBox1.Size = new Size(127, 24);
-			checkBox1.TabIndex = 3;
-			checkBox1.Text = "Hiện mật khẩu";
-			checkBox1.UseVisualStyleBackColor = true;
-			checkBox1.CheckedChanged += checkBox1_CheckedChanged;
-			// 
-			// button1
-			// 
-			button1.Location = new Point(271, 307);
-			button1.Name = "button1";
-			button1.Size = new Size(207, 29);
-			button1.TabIndex = 4;
-			button1.Text = "Đăng nhập";
-			button1.UseVisualStyleBackColor = true;
-			// 
-			// textBox1
-			// 
-			textBox1.Location = new Point(326, 136);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(202, 27);
-			textBox1.TabIndex = 5;
-			// 
-			// textBox2
-			// 
-			textBox2.Location = new Point(326, 198);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(202, 27);
-			textBox2.TabIndex = 6;
-			// 
-			// linkLabel1
-			// 
-			linkLabel1.AutoSize = true;
-			linkLabel1.Location = new Point(408, 249);
-			linkLabel1.Name = "linkLabel1";
-			linkLabel1.Size = new Size(120, 20);
-			linkLabel1.TabIndex = 7;
-			linkLabel1.TabStop = true;
-			linkLabel1.Text = "Quên mật khẩu ?";
+			label2.Size = new Size(141, 20);
+			label2.TabIndex = 16;
+			label2.Text = "MENU CHỨC NĂNG";
 			// 
 			// FormTrangChu
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(800, 450);
-			Controls.Add(linkLabel1);
-			Controls.Add(textBox2);
-			Controls.Add(textBox1);
-			Controls.Add(button1);
-			Controls.Add(checkBox1);
-			Controls.Add(label3);
+			BackColor = Color.PaleGreen;
+			BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+			ClientSize = new Size(958, 497);
 			Controls.Add(label2);
+			Controls.Add(btnDoiMatKhau);
+			Controls.Add(btnXemLuongCaNhan);
+			Controls.Add(btnTaiKhoan);
+			Controls.Add(btnNghiPhep);
+			Controls.Add(btnThoat);
+			Controls.Add(btnDangXuat);
+			Controls.Add(btnLuong);
+			Controls.Add(btnChamCong);
+			Controls.Add(btnNhanVien);
 			Controls.Add(label1);
+			ForeColor = Color.Black;
+			Margin = new Padding(3, 4, 3, 4);
 			Name = "FormTrangChu";
-			Text = "FormLogin";
+			Text = "FormTrangChu";
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -134,12 +182,15 @@
 		#endregion
 
 		private Label label1;
+        private Button btnNhanVien;
+        private Button btnChamCong;
+        private Button btnLuong;
+        private Button btnDangXuat;
+        private Button btnThoat;
+        private Button btnNghiPhep;
+        private Button btnTaiKhoan;
+        private Button btnXemLuongCaNhan;
+		private Button btnDoiMatKhau;
 		private Label label2;
-		private Label label3;
-		private CheckBox checkBox1;
-		private Button button1;
-		private TextBox textBox1;
-		private TextBox textBox2;
-		private LinkLabel linkLabel1;
 	}
 }

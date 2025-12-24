@@ -20,89 +20,228 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            label1 = new Label();
-            txtIdNV = new TextBox();
-            btnCheckIn = new Button();
-            btnCheckOut = new Button();
-            dgvChamCong = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dgvChamCong).BeginInit();
-            SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(45, 36);
-            label1.Name = "label1";
-            label1.Size = new Size(82, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Mã Nhân Viên";
-            // 
-            // txtIdNV
-            // 
-            txtIdNV.Location = new Point(162, 33);
-            txtIdNV.Name = "txtIdNV";
-            txtIdNV.Size = new Size(100, 23);
-            txtIdNV.TabIndex = 1;
-            // 
-            // btnCheckIn
-            // 
-            btnCheckIn.Location = new Point(45, 101);
-            btnCheckIn.Name = "btnCheckIn";
-            btnCheckIn.Size = new Size(104, 50);
-            btnCheckIn.TabIndex = 2;
-            btnCheckIn.Text = "Check In";
-            btnCheckIn.UseVisualStyleBackColor = true;
-            // 
-            // btnCheckOut
-            // 
-            btnCheckOut.Location = new Point(45, 176);
-            btnCheckOut.Name = "btnCheckOut";
-            btnCheckOut.Size = new Size(104, 50);
-            btnCheckOut.TabIndex = 3;
-            btnCheckOut.Text = "Check Out";
-            btnCheckOut.UseVisualStyleBackColor = true;
-            // 
-            // dgvChamCong
-            // 
-            dgvChamCong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvChamCong.Location = new Point(315, 33);
-            dgvChamCong.Name = "dgvChamCong";
-            dgvChamCong.Size = new Size(272, 212);
-            dgvChamCong.TabIndex = 4;
-            dgvChamCong.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // Form4
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(601, 258);
-            Controls.Add(dgvChamCong);
-            Controls.Add(btnCheckOut);
-            Controls.Add(btnCheckIn);
-            Controls.Add(txtIdNV);
-            Controls.Add(label1);
-            Name = "Form4";
-            Text = "Form4";
-            Load += Form4_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvChamCong).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
-        }
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChamCong));
+			dgvChamCong = new DataGridView();
+			label2 = new Label();
+			dtpThangNam = new DateTimePicker();
+			txtSoNgayCong = new TextBox();
+			txtGhiChu = new TextBox();
+			btnLuu = new Button();
+			btnXoa = new Button();
+			label1 = new Label();
+			label3 = new Label();
+			label4 = new Label();
+			label5 = new Label();
+			btnThoat = new Button();
+			btnSua = new Button();
+			btnDiemDanh = new Button();
+			cboNhanVien = new ComboBox();
+			((System.ComponentModel.ISupportInitialize)dgvChamCong).BeginInit();
+			SuspendLayout();
+			// 
+			// dgvChamCong
+			// 
+			dgvChamCong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvChamCong.Location = new Point(0, 341);
+			dgvChamCong.Margin = new Padding(3, 4, 3, 4);
+			dgvChamCong.Name = "dgvChamCong";
+			dgvChamCong.RowHeadersWidth = 51;
+			dgvChamCong.Size = new Size(1082, 394);
+			dgvChamCong.TabIndex = 4;
+			dgvChamCong.CellContentClick += dgvChamCong_CellClick;
+			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.BackColor = Color.PaleGreen;
+			label2.ForeColor = Color.Black;
+			label2.Location = new Point(488, 12);
+			label2.Name = "label2";
+			label2.Size = new Size(161, 20);
+			label2.TabIndex = 5;
+			label2.Text = "QUẢN LÝ CHẤM CÔNG";
+			// 
+			// dtpThangNam
+			// 
+			dtpThangNam.CustomFormat = "MM/yyyy";
+			dtpThangNam.Format = DateTimePickerFormat.Custom;
+			dtpThangNam.Location = new Point(157, 138);
+			dtpThangNam.Name = "dtpThangNam";
+			dtpThangNam.Size = new Size(413, 27);
+			dtpThangNam.TabIndex = 7;
+			// 
+			// txtSoNgayCong
+			// 
+			txtSoNgayCong.Location = new Point(157, 200);
+			txtSoNgayCong.Name = "txtSoNgayCong";
+			txtSoNgayCong.Size = new Size(413, 27);
+			txtSoNgayCong.TabIndex = 8;
+			// 
+			// txtGhiChu
+			// 
+			txtGhiChu.Location = new Point(157, 263);
+			txtGhiChu.Name = "txtGhiChu";
+			txtGhiChu.Size = new Size(413, 27);
+			txtGhiChu.TabIndex = 9;
+			// 
+			// btnLuu
+			// 
+			btnLuu.BackColor = Color.Gainsboro;
+			btnLuu.Location = new Point(596, 68);
+			btnLuu.Name = "btnLuu";
+			btnLuu.Size = new Size(143, 59);
+			btnLuu.TabIndex = 10;
+			btnLuu.Text = "Lưu";
+			btnLuu.UseVisualStyleBackColor = false;
+			btnLuu.Click += btnLuu_Click;
+			// 
+			// btnXoa
+			// 
+			btnXoa.BackColor = Color.Gainsboro;
+			btnXoa.Location = new Point(773, 68);
+			btnXoa.Name = "btnXoa";
+			btnXoa.Size = new Size(136, 59);
+			btnXoa.TabIndex = 11;
+			btnXoa.Text = "Xóa";
+			btnXoa.UseVisualStyleBackColor = false;
+			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.BackColor = Color.PaleGreen;
+			label1.Location = new Point(18, 71);
+			label1.Name = "label1";
+			label1.Size = new Size(97, 20);
+			label1.TabIndex = 12;
+			label1.Text = "Mã nhân viên";
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.BackColor = Color.PaleGreen;
+			label3.Location = new Point(21, 143);
+			label3.Name = "label3";
+			label3.Size = new Size(85, 20);
+			label3.TabIndex = 13;
+			label3.Text = "Chọn tháng";
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.BackColor = Color.PaleGreen;
+			label4.Location = new Point(21, 207);
+			label4.Name = "label4";
+			label4.Size = new Size(99, 20);
+			label4.TabIndex = 14;
+			label4.Text = "Số ngày công";
+			// 
+			// label5
+			// 
+			label5.AutoSize = true;
+			label5.BackColor = Color.PaleGreen;
+			label5.Location = new Point(21, 266);
+			label5.Name = "label5";
+			label5.Size = new Size(58, 20);
+			label5.TabIndex = 15;
+			label5.Text = "Ghi chú";
+			// 
+			// btnThoat
+			// 
+			btnThoat.BackColor = Color.Gainsboro;
+			btnThoat.Location = new Point(679, 243);
+			btnThoat.Name = "btnThoat";
+			btnThoat.Size = new Size(144, 58);
+			btnThoat.TabIndex = 16;
+			btnThoat.Text = "Thoát";
+			btnThoat.UseVisualStyleBackColor = false;
+			btnThoat.TextChanged += btnThoat_Click;
+			btnThoat.Click += btnThoat_Click;
+			// 
+			// btnSua
+			// 
+			btnSua.BackColor = Color.Gainsboro;
+			btnSua.Location = new Point(596, 154);
+			btnSua.Name = "btnSua";
+			btnSua.Size = new Size(143, 60);
+			btnSua.TabIndex = 20;
+			btnSua.Text = "Sửa";
+			btnSua.UseVisualStyleBackColor = false;
+			// 
+			// btnDiemDanh
+			// 
+			btnDiemDanh.BackColor = Color.Gainsboro;
+			btnDiemDanh.Location = new Point(773, 156);
+			btnDiemDanh.Name = "btnDiemDanh";
+			btnDiemDanh.Size = new Size(136, 56);
+			btnDiemDanh.TabIndex = 21;
+			btnDiemDanh.Text = "Điểm danh";
+			btnDiemDanh.UseVisualStyleBackColor = false;
+			btnDiemDanh.Click += btnDiemDanh_Click;
+			// 
+			// cboNhanVien
+			// 
+			cboNhanVien.DropDownStyle = ComboBoxStyle.DropDownList;
+			cboNhanVien.FormattingEnabled = true;
+			cboNhanVien.Location = new Point(157, 63);
+			cboNhanVien.Name = "cboNhanVien";
+			cboNhanVien.Size = new Size(413, 28);
+			cboNhanVien.TabIndex = 22;
+			// 
+			// FormChamCong
+			// 
+			AutoScaleDimensions = new SizeF(8F, 20F);
+			AutoScaleMode = AutoScaleMode.Font;
+			BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+			ClientSize = new Size(1084, 738);
+			Controls.Add(cboNhanVien);
+			Controls.Add(btnDiemDanh);
+			Controls.Add(btnSua);
+			Controls.Add(btnThoat);
+			Controls.Add(label5);
+			Controls.Add(label4);
+			Controls.Add(label3);
+			Controls.Add(label1);
+			Controls.Add(btnXoa);
+			Controls.Add(btnLuu);
+			Controls.Add(txtGhiChu);
+			Controls.Add(txtSoNgayCong);
+			Controls.Add(dtpThangNam);
+			Controls.Add(label2);
+			Controls.Add(dgvChamCong);
+			ForeColor = Color.Black;
+			Margin = new Padding(3, 4, 3, 4);
+			Name = "FormChamCong";
+			Text = "FormChamCong";
+			Load += FormChamCong_Load;
+			Click += btnXoa_Click;
+			((System.ComponentModel.ISupportInitialize)dgvChamCong).EndInit();
+			ResumeLayout(false);
+			PerformLayout();
+		}
 
-        #endregion
-
+		#endregion
+		private DataGridView dgvChamCong;
+        private Label label2;
+        private DateTimePicker dtpThangNam;
+        private TextBox txtSoNgayCong;
+        private TextBox txtGhiChu;
+        private Button btnLuu;
+        private Button btnXoa;
         private Label label1;
-        private TextBox txtIdNV;
-        private Button btnCheckIn;
-        private Button btnCheckOut;
-        private DataGridView dgvChamCong;
-    }
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Button btnThoat;
+        private Button btnSua;
+        private Button btnDiemDanh;
+		private ComboBox cboNhanVien;
+	}
 }
