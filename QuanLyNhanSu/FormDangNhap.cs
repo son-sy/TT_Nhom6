@@ -5,75 +5,76 @@ using System.Windows.Forms;
 
 namespace QuanLyNhanSu
 {
-	public partial class FormDangNhap : System.Windows.Forms.Form
-	{
-		// Khởi tạo kết nối cơ sở dữ liệu
-		QuanLyNhanSuContext db = new QuanLyNhanSuContext();
+    public partial class FormDangNhap : System.Windows.Forms.Form
+    {
+        //Khởi tạo Context để kết nối CSDL qua Entity Framework
+        QuanLyNhanSuContext db = new QuanLyNhanSuContext();
 
-		public FormDangNhap()
-		{
-			InitializeComponent();
-		}
+        public FormDangNhap()
+        {
+            InitializeComponent();
+        }
 
-		private void FormTrangChu_Load(object sender, EventArgs e)
-		{
-			//Ẩn ký tự mật khẩu khi mở form
-			txtMatKhau.UseSystemPasswordChar = true;
-		}
+        private void FormTrangChu_Load(object sender, EventArgs e)
+        {
+            //ẩn ký tự mật khẩu thành dấu chấm tròn
+            txtMatKhau.UseSystemPasswordChar = true;
+        }
 
-		private void btnDangNhap_Click(object sender, EventArgs e)
-		{
-			string tk = txtTaiKhoan.Text;
-			string mk = txtMatKhau.Text;
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            string tk = txtTaiKhoan.Text;
+            string mk = txtMatKhau.Text;
 
-			// Kiểm tra trong DB xem có tài khoản nào khớp user và pass không
-			var user = db.TKs.FirstOrDefault(u => u.TenTk == tk && u.MKhauTk == mk);
+            //Truy vấn cơ sở dữ liệu để tìm tài khoản khớp trả về null nếu không tìm thấy.
+            var user = db.TKs.FirstOrDefault(u => u.TenTk == tk && u.MKhauTk == mk);
 
-			if (user != null)
-			{
-				// 1. Lưu thông tin phiên đăng nhập (Session) để dùng cho các Form khác
-				LuuTru.Quyen = user.VaiTro;
-				LuuTru.IdNhanVien = user.IdNv;
+            if (user != null)
+            {
+                // Lưu Session
+                LuuTru.Quyen = user.VaiTro;     // Lưu quyền 
+                LuuTru.IdNhanVien = user.IdNv;  // Lưu ID để truy xuất dữ liệu cá nhân
 
-				MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				// 2. Ẩn form đăng nhập và mở form Trang chủ
-				this.Hide();
-				FormTrangChu main = new FormTrangChu();
+                //Ẩn form đăng nhập đi để chuyển sang Form chính
+                this.Hide();
+                FormTrangChu main = new FormTrangChu();
 
-				// ShowDialog để đợi kết quả trả về khi user đóng form Trang chủ
-				DialogResult ketQua = main.ShowDialog();
+                // Dùng ShowDialog để chương trình dừng tại đây chờ Form chính xử lý
+                DialogResult ketQua = main.ShowDialog();
 
-				// 3. Xử lý khi đóng Form Trang chủ
-				if (ketQua == DialogResult.OK)
-				{
-					// Nếu user bấm đăng xuất quay lại form đăng nhập, xóa mật khẩu cũ
-					this.Show();
-					txtMatKhau.Text = "";
-					txtTaiKhoan.Focus();
-				}
-				else
-				{
-					// Nếu user thoát chương trình thì đóng form
-					this.Close();
-				}
-			}
-			else
-			{
-				MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
+                //Xử lý kết quả trả về từ FormTrangChu
+                if (ketQua == DialogResult.OK)
+                {
+                    // Nếu bấm Đăng xuất: Hiện lại form này và xóa mật khẩu
+                    this.Show();
+                    txtMatKhau.Text = "";
+                    txtTaiKhoan.Focus();
+                }
+                else
+                {
+                    // Nếu bấm dấu X (Thoát) ở form chính: Đóng toàn bộ ứng dụng
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-		private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)
-		{
-			if (chkHienMatKhau.Checked)
-			{
-				txtMatKhau.UseSystemPasswordChar = false; // Hiện chữ
-			}
-			else
-			{
-				txtMatKhau.UseSystemPasswordChar = true;  // Hiện dấu chấm
-			}
-		}
-	}
+        private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)
+        {
+            //Cho phép người dùng xem mật khẩu khi cần
+            if (chkHienMatKhau.Checked)
+            {
+                txtMatKhau.UseSystemPasswordChar = false; // Hiện chữ thường
+            }
+            else
+            {
+                txtMatKhau.UseSystemPasswordChar = true;  // Hiện ký tự mật khẩu
+            }
+        }
+    }
 }

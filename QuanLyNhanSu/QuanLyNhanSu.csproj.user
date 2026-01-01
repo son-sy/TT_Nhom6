@@ -7,22 +7,22 @@
     <Compile Update="FormDoiMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="FormTK.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormTrangChu.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="FormNghiPhep.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormLuong.cs">
+    <Compile Update="FormDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormDangNhap.cs">
+    <Compile Update="FormTrangChu.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
